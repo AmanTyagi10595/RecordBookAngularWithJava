@@ -1,0 +1,181 @@
+<mat-progress-bar mode="indeterminate" *ngIf = "process"></mat-progress-bar>
+<div class="container" style="margin-left:16%">
+    <div class="row">
+    <div class="col-2"></div>
+    <div class="container" class="col-7">
+      <h2>Sale Record</h2>
+      <form [formGroup]="saleRecord">
+        <div class="border p-3 shadow mb-5 bg-white rounded">
+          <div class="row">
+            <div *ngIf="!obj.email" class="form-group col-6">
+              <label for="email">Email</label>
+              <!-- <input type="text" class="form-control" placeholder="Email" name="email" formControlName="email"> -->
+              <input class="form-control" type="text" (keyup)="getUserEmail($event)" id="userIdFirstWay" list="dynmicUserIds" name="email" formControlName="email">
+              <datalist id="dynmicUserIds">
+                <option *ngFor="let item of allCustomersEmail" [value]="item">{{item}}</option>
+              </datalist>
+            </div>
+            <div class="form-group col-6 pt-4">
+              <!-- <input type="file" (change)="onFileChanged($event)" multiple> -->
+
+              <input class="form-control" type="file" ng2FileSelect [uploader]="FilesUploader" multiple (change)="myFiles()" hidden/>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-6">
+              <label for="amount">Amount</label>
+              <input type="number" class="form-control" placeholder="Amount" name="amount" formControlName="amount">
+            </div>
+            <div class="form-group col-6">
+              <label for="payed">Payed Amount</label>
+              <input type="number" class="form-control" placeholder="Payed Amount" name="payedAmout" formControlName="payedAmout">
+            </div>
+          </div>
+          <div class="row">
+            <mat-form-field class="col-6">
+              <mat-label>Sell Date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="sale_date" (dateChange)="onSelectSaleDate($event)">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-6">
+              <mat-label>Pro_Date</mat-label>
+              <input matInput [matDatepicker]="picker2" formControlName="promis_date" [min]="minDate | date:'yyyy-MM-dd'">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="">
+            <div *ngIf="!obj.email" class="row">
+
+              <!-- <div class="form-group col-6">
+                <label for="amount">Email</label>
+                <input type="text" class="form-control" placeholder="Email" name="email" formControlName="email">
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-4">
+                    <label>Notifie</label>
+                  </div>
+                  <label class="switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" checked (change)="mySwitch = !mySwitch">
+                    <div class="slider round"></div>
+                  </label>
+                </div>
+              </div>
+              <div class="col-6">
+                <button type="submit" class="btn btn-primary float-right" (click)="onAddSale()">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-2 pt-5" *ngIf="obj.email">
+      <div class="card forBox" style="width: 14rem;">
+        <img src="assets/demo.jpg" class="card-img-top  img-thumbnail forHeight img-fluid" alt="...">
+        <div class="card-body ">
+         <strong><span>Address :</span></strong> <span class="card-text">{{customerDetails.address}}</span>
+          <div class="card-body forStyle shopping-cart-wrap">
+            <var *ngIf="customerBalance < 0" class="card-text amount">{{customerBalance }} Jma</var>
+
+            <p *ngIf=" customerBalance > 0" class="card-text"><i class="fa fa-inr"></i>{{customerBalance}} Uhar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container ">
+    <div class="card ">
+      <table class="table table-hover shopping-cart-wrap">
+        <thead class="text-muted thead-light">
+          <tr>
+            <th scope="col" width="180">Image</th>
+            <th scope="col" width="120">Sale Date</th>
+            <th scope="col" width="120">Amount</th>
+            <th scope="col" width="100">Payed</th>
+            <th scope="col" width="120">Balance</th>
+            <th scope="col" width="120">Pro_Date</th>
+            <th scope="col" width="120">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let sale of oneCustomerSale;  let indx=index">
+            <tr>
+              <td>
+                <figure class="media">
+                  <div class="img-wrap"><img src="assets/demo2.jpg" class="img-thumbnail img-sm"></div>
+                  <figcaption class="media-body">
+                    <h6 class="title text-truncate">{{sale.name}}</h6>
+                    <!-- <dl class="param param-inline small">
+                      <dt>Add: </dt>
+                      <dd>{{sale.address}}</dd>
+                    </dl>
+                    <dl class="param param-inline small">
+                      <dt>Email: </dt>
+                      <dd>{{customer.email}}</dd>
+                    </dl> -->
+                  </figcaption>
+                </figure>
+              </td>
+              <td>
+                {{sale.sale_date | date: 'dd/MM/yyyy'}}
+              </td>
+              <td>
+                <div class="price-wrap">
+                  <var class="amount">{{sale.amount}}</var>
+                  <small class="text-muted">(cash)</small>
+                </div> <!-- price-wrap .// -->
+              </td>
+              <td>
+                <var class="pay">{{sale.payedAmout}}</var>
+              </td>
+              <td>
+                <var class="pay">{{sale.balance}}</var>
+              </td>
+              <td>
+                <var>{{sale.promis_date | date: 'dd/MM/yyyy'}}</var>
+              </td>
+              <td class="text-center">
+                <a title="" href="" class="btn btn-outline-success" data-toggle="tooltip" data-original-title="Save to Wishlist"> <i class="fa fa-info"></i></a>
+                <button class="btn btn-outline-danger ml-1" (click)=deleteOneSale(sale.id)> <i class="fa fa-trash"></i></button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div> <!-- card.// -->
+  </div>
+  <!--container end.//-->
+
+  <br><br>
+<!-- <div class = "container"> 
+  <vg-player>
+    <vg-controls>
+        <vg-play-pause></vg-play-pause>
+        <vg-playback-button></vg-playback-button>
+  
+        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+  
+        <vg-scrub-bar>
+            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+        </vg-scrub-bar>
+  
+        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+  
+        <vg-mute></vg-mute>
+        <vg-volume></vg-volume>
+  
+        <vg-fullscreen></vg-fullscreen>
+    </vg-controls>
+  
+    <video #media [vgMedia]="media" id="singleVideo" preload="auto" crossorigin>
+        <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
+    </video>
+ </vg-player>
+</div> -->

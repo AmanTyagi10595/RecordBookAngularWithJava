@@ -1,0 +1,124 @@
+.param {
+  margin-bottom: 7px;
+  line-height: 1.4;
+}
+.param-inline dt {
+  display: inline-block;
+}
+.param dt {
+  margin: 0;
+  margin-right: 7px;
+  font-weight: 600;
+}
+.param-inline dd {
+  vertical-align: baseline;
+  display: inline-block;
+}
+
+.param dd {
+  margin: 0;
+  vertical-align: baseline;
+}
+
+.shopping-cart-wrap .amount {
+  color: #007bff;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 5px;
+  display: block;
+}
+.shopping-cart-wrap .pay {
+  color: #47d147;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 5px;
+  display: block;
+}
+var {
+  font-style: normal;
+}
+
+.media img {
+  margin-right: 1rem;
+}
+.img-sm {
+  width: 90px;
+  max-height: 75px;
+  object-fit: cover;
+}
+.switch {
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 53px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 18px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 18px;
+}
+
+input:checked + .slider {
+  background-color: #66bb6a;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.forStyle {
+  background-color: #f9f3f3;
+}
+.forBox {
+  -webkit-box-shadow: 0px 0px 12px -6px rgba(21, 23, 26, 0.61);
+  -moz-box-shadow: 0px 0px 12px -6px rgba(21, 23, 26, 0.61);
+  box-shadow: 0px 0px 12px -6px rgba(21, 23, 26, 0.61);
+  border-radius: 14px 14px 14px 14px;
+  -moz-border-radius: 14px 14px 14px 14px;
+  -webkit-border-radius: 14px 14px 14px 14px;
+  border: 0px solid #d117d1;
+}
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.forHeight{
+  max-height: 167px;
+}
+

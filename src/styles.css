@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~saturn-datepicker/bundle.css";
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.ng5-slider .ng5-slider-pointer:after {
+  background-color: #178fab !important;
+  top: 28px !important;
+  left: 0px;
+}
+.ng5-slider .ng5-slider-pointer {
+  background-color: inherit !important;
+}
